@@ -1,6 +1,6 @@
 # Setup
 
-1. Setup combine
+1. Setup combine (Reference: [https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/](https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/)
 
   ```bash
   export SCRAM_ARCH=slc7_amd64_gcc700
