@@ -7,7 +7,7 @@ import sys, os, pwd, commands
 import optparse, shlex, re
 import math
 from ROOT import *
-import ROOT
+#import ROOT
 from array import array
 from datacardClass import *
 from inputReader import *
@@ -93,8 +93,9 @@ def creationLoop(directory):
 #    startMass=[ 127.0, 130.0, 160.0]
 #    stepSizes=[ 0.5,    1.0,   2.0]
 #    endVal=[     6,      30,    21]
-
+    print "[INFO] declar datacardClass"
     myClass = datacardClass()
+    print "[INFO] load root module"
     myClass.loadIncludes()
 
     a=0
@@ -122,7 +123,9 @@ def creationLoop(directory):
             for channel in channels :
 
                for cat in cats:
-
+                  
+                  inputreadertxt = opt.inputDir+"/"+channel+"_"+cat+".txt"
+                  print "[INFO] it {}".format(inputreadertxt)
                   myReader = inputReader(opt.inputDir+"/"+channel+"_"+cat+".txt")
                   myReader.readInputs()
                   theInputs = myReader.getInputs()
@@ -165,6 +168,7 @@ def makeDCsandWSs():
 
 # run the create_RM_cfg() as main()
 if __name__ == "__main__":
+    print "[INFO] start main()"
     makeDCsandWSs()
 
 
