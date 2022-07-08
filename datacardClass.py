@@ -12,17 +12,17 @@ from decimal import *
 import json
 from ROOT import *
 
-from systematicsClass import *
+#from systematicsClass import *
 from inputReader import *
 
 from array import array
 
-gROOT.ProcessLine(
-    "struct zz2lJ_massStruct {\
-    Double_t zz2lJ_mass;\
-    };" );
-
-from ROOT import zz2lJ_massStruct
+#gROOT.ProcessLine(
+#    "struct zz2lJ_massStruct {\
+#    Double_t zz2lJ_mass;\
+#    };" );
+#
+#from ROOT import zz2lJ_massStruct
 
 ## ------------------------------------
 ##  card and workspace class
