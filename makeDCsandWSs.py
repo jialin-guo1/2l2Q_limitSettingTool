@@ -18,12 +18,12 @@ def parseOptions():
     usage = ('usage: %prog [options] datasetList\n'
              + '%prog -h for help')
     parser = optparse.OptionParser(usage)
-    
+
     parser.add_option('-i', '--input', dest='inputDir', type='string', default="",    help='inputs directory')
     parser.add_option('-d', '--is2D',   dest='is2D',       type='int',    default=1,     help='is2D (default:1)')
     parser.add_option('-a', '--append', dest='appendName', type='string', default="",    help='append name for cards dir')
     parser.add_option('-b', action='store_true', dest='noX', default=True ,help='no X11 windows')
-    parser.add_option('-f', '--fracVBF',   dest='fracVBF',       type='float',    default=0.005,     help='fracVBF (default:0.5%)')    
+    parser.add_option('-f', '--fracVBF',   dest='fracVBF',       type='float',    default=0.005,     help='fracVBF (default:0.5%)')
 
     # store options and arguments as global variables
     global opt, args
@@ -73,7 +73,7 @@ def processCmd(cmd):
 
 def creationLoop(directory):
     global opt, args
-    
+
 #    startMass=[ 380.0, 400.0, 600.0 ]
 #    stepSizes=[ 10.0,   20.0, 50.0 ]
 #    endVal=[ 1, 10, 9 ]
@@ -100,13 +100,13 @@ def creationLoop(directory):
 
     a=0
     while (a < len(startMass) ):
-	
+
 	c = 0
-        while (c < endVal[a] ): 
-            
+        while (c < endVal[a] ):
+
             mStart = startMass[a]
             step = stepSizes[a]
-            mh = mStart + ( step * c ) 
+            mh = mStart + ( step * c )
             mhs = str(mh).replace('.0','')
 
             print mh
@@ -123,7 +123,7 @@ def creationLoop(directory):
             for channel in channels :
 
                for cat in cats:
-                  
+
                   inputreadertxt = opt.inputDir+"/"+channel+"_"+cat+".txt"
                   print "[INFO] it {}".format(inputreadertxt)
                   myReader = inputReader(opt.inputDir+"/"+channel+"_"+cat+".txt")
@@ -133,7 +133,7 @@ def creationLoop(directory):
                   myClass.makeCardsWorkspaces(mh,opt.is2D,directory,theInputs,cat, opt.fracVBF)
 
             c += 1
-            
+
 
 	a += 1
 
@@ -144,23 +144,23 @@ def creationLoop(directory):
 
 # the main procedure
 def makeDCsandWSs():
-    
+
     # parse the arguments and options
     global opt, args
     parseOptions()
 
     if (opt.appendName != ''):
         dirName = 'cards_'+opt.appendName
-    
+
 
     subdir = ['HCG','figs']
 
     for d in subdir:
             makeDirectory(dirName+'/'+d)
-        
+
 
     creationLoop(dirName)
-    
+
 
     sys.exit()
 
@@ -170,5 +170,3 @@ def makeDCsandWSs():
 if __name__ == "__main__":
     print "[INFO] start main()"
     makeDCsandWSs()
-
-
