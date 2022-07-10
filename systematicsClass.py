@@ -1,11 +1,6 @@
 #! /usr/bin/env python
-import os
-import re
 import math
-from ROOT import *
-import ROOT
-from array import array
-
+# from ROOT import *
 
 ## ------------------------------------
 ##  systematics class
@@ -60,17 +55,17 @@ class systematicsClass:
         self.vzBTAGHigh = theInputs['vzBTAGHigh']
 
         self.theoryHighMass = 1
-        
+
         self.qqVV_scaleSys = 1. + 0.01*math.sqrt((self.mH - 20.)/13.)
         self.qqVV_pdfSys = 1. + 0.0035*math.sqrt(self.mH - 30.)
-            
+
 
     def setSystematics(self,rates):
 
         self.rateBkg_vz = rates['vz']
         self.rateBkg_ttbar = rates['ttbar']
         self.rateBkg_zjets = rates['zjets']
-       
+
         self.muSelError = 1 + math.sqrt( self.sel_muonfull*self.sel_muonfull + self.sel_muontrig*self.sel_muontrig )
         self.eSelError = 1 + math.sqrt( self.sel_elefull*self.sel_elefull + self.sel_eletrig*self.sel_eletrig )
 
@@ -80,14 +75,14 @@ class systematicsClass:
 
         if theInputs["all"]:
             channelList=['ggH','qqH','vz','ttbar','zjets']
-        
+
         for chan in channelList:
             if theInputs[chan] or (chan.startswith("ggH") and theInputs["all"]):
                 print chan, systLine[chan]
                 theFile.write(systLine[chan])
 
         theFile.write("\n")
-        
+
     def Build_lumi(self,theFile,theInputs):
         if(self.sqrts == 7):
             theFile.write("lumi_7TeV lnN ")
@@ -105,17 +100,17 @@ class systematicsClass:
         systLine['vz']  = "{0} ".format(self.lumiUncertainty)
 
         self.Write_Systematics_Line(systLine,theFile,theInputs)
-        
+
     def Write_pdf_qqbar(self,theFile,theInputs):
 
         theFile.write("pdf_qqbar lnN ")
-            
+
         if not self.isForXSxBR:
             systLine={'ggH':"- "}
             systLine['qqH']  = "1.021 "#"{0:.4f} ".format(1. + (self.CSpdfErrPlus_vbf-self.CSpdfErrMinus_vbf)/2.)
             systLine['zjets']= "- "
             systLine['ttbar']= "- "
-            systLine['vz']  = "1.03 "            
+            systLine['vz']  = "1.03 "
             self.Write_Systematics_Line(systLine,theFile,theInputs)
 
         elif self.isForXSxBR:
@@ -125,7 +120,7 @@ class systematicsClass:
             systLine['ttbar']= "- "
             systLine['vz']  = "1.03 "
             self.Write_Systematics_Line(systLine,theFile,theInputs)
-                 
+
     def Write_pdf_gg(self,theFile,theInputs):
 
         if not self.isForXSxBR:
@@ -134,34 +129,34 @@ class systematicsClass:
 
             systLine={'ggH':"1.0252/0.9718 "}
             systLine['qqH']  = "- "
-            systLine['zjets']= "- " 
+            systLine['zjets']= "- "
             systLine['ttbar']= "- "
             systLine['vz']  = "- "
-            
+
             self.Write_Systematics_Line(systLine,theFile,theInputs)
-            
+
     def Write_pdf_hzz2l2q_accept(self,theFile,theInputs):
 
         theFile.write("pdf_hzz2l2q_accept lnN ")
         systLine={'ggH':"1.02 "}
         systLine['qqH']  = "1.02 "
-        systLine['zjets']= "- " 
+        systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "- "
-        
-        self.Write_Systematics_Line(systLine,theFile,theInputs)            
+
+        self.Write_Systematics_Line(systLine,theFile,theInputs)
 
     def Write_QCDscale_ggH(self,theFile,theInputs):
-        
+
         theFile.write("QCDscale_ggH lnN ")
 
         systLine={'ggH':"1.1067/0.8874 "}#"{0:.4f} ".format(1. + (self.CSscaleErrPlus_gg-self.CSscaleErrMinus_gg)/2.)}
         systLine['qqH']  = "- "
-        systLine['zjets']= "- " 
+        systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "- "
-        
-        self.Write_Systematics_Line(systLine,theFile,theInputs)            
+
+        self.Write_Systematics_Line(systLine,theFile,theInputs)
 
     def Write_QCDscale_qqH(self,theFile,theInputs):
 
@@ -169,12 +164,12 @@ class systematicsClass:
 
         systLine={'ggH':"- "}
         systLine['qqH']  = "1.0065/0.9982 "#"{0:.4f} ".format(1. + (self.CSscaleErrPlus_vbf-self.CSscaleErrMinus_vbf)/2.)
-        systLine['zjets']= "- " 
+        systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "- "
-        
-        self.Write_Systematics_Line(systLine,theFile,theInputs)            
-        
+
+        self.Write_Systematics_Line(systLine,theFile,theInputs)
+
 
     def Write_QCDscale_VV(self,theFile,theInputs):
 
@@ -182,26 +177,26 @@ class systematicsClass:
 
         systLine={'ggH':"- "}
         systLine['qqH']  = "- "
-        systLine['vz'] = "1.0356 " 
-        systLine['zjets']= "- " 
+        systLine['vz'] = "1.0356 "
+        systLine['zjets']= "- "
         systLine['ttbar']= "- "
-        
-        self.Write_Systematics_Line(systLine,theFile,theInputs)                         
-                
+
+        self.Write_Systematics_Line(systLine,theFile,theInputs)
+
     def Write_BRhiggs_hzz2l2q(self,theFile,theInputs):
 
         theFile.write("BRhiggs_hzz2l2q lnN ")
 
         systLine={'ggH':"1.02 "}
-        systLine['qqH']  = "1.02 " 
+        systLine['qqH']  = "1.02 "
         systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "- "
-        
+
         self.Write_Systematics_Line(systLine,theFile,theInputs)
-        
+
     def Write_gamma_HVV(self,theFile,theInputs):
-      
+
         theFile.write("gamma_HVV lnN ")
 
         systLine={'ggH':"{0:.4f} ".format(self.BRErr_HVV)}
@@ -209,7 +204,7 @@ class systematicsClass:
         systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "- "
-        
+
         self.Write_Systematics_Line(systLine,theFile,theInputs)
 
     def Write_eff_e(self,theFile,theInputs):
@@ -221,9 +216,9 @@ class systematicsClass:
         systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "{0:.3f} ".format(self.eSelError)
-            
+
         self.Write_Systematics_Line(systLine,theFile,theInputs)
-            
+
     def Write_eff_m(self,theFile,theInputs):
 
         theFile.write("CMS_eff_m lnN ")
@@ -232,7 +227,7 @@ class systematicsClass:
         systLine['zjets']= "- "
         systLine['ttbar']= "- "
         systLine['vz']  = "{0:.3f} ".format(self.muSelError)
-            
+
         self.Write_Systematics_Line(systLine,theFile,theInputs)
 
 
@@ -364,7 +359,7 @@ class systematicsClass:
 
         if theInputs['usePdf_qqbar']:
             self.Write_pdf_qqbar(theFile,theInputs)
-		
+
         if theInputs['usePdf_hzz2l2q_accept']:
             self.Write_pdf_hzz2l2q_accept(theFile,theInputs)
 
@@ -377,18 +372,18 @@ class systematicsClass:
 
 	    if theInputs['useQCDscale_qqH'] :
                 self.Write_QCDscale_qqH(theFile,theInputs)
-	
+
 	## Higgs BR
         if theInputs['useBRhiggs_hzz2l2q'] and not self.isForXSxBR :
             self.Write_BRhiggs_hzz2l2q(theFile,theInputs)
-	  
+
 	##  ----------- SELECTION EFFICIENCIES ----------
-            
+
         if(self.decayChan=="mumuqq_Resolved" or self.decayChan=="mumuqq_Merged"):
  	       self.Write_eff_m(theFile,theInputs)
         if(self.decayChan=="eeqq_Resolved" or self.decayChan=="eeqq_Merged"):
         	self.Write_eff_e(theFile,theInputs)
-                
+
         self.Write_CMS_hzz2l2q_Zjets(theFile,theInputs)
 
         bkgRate_ttbar_Shape=rates['ttbar']
@@ -406,7 +401,7 @@ class systematicsClass:
 
 
     def WriteShapeSystematics(self,theFile,theInputs):
-  
+
         meanCB_e_errPerCent = theInputs['CMS_zz2l2q_mean_e_err']
         sigmaCB_e_errPerCent = theInputs['CMS_zz2l2q_sigma_e_err']
         meanCB_m_errPerCent = theInputs['CMS_zz2l2q_mean_m_err']
@@ -434,8 +429,8 @@ class systematicsClass:
             theFile.write("CMS_zz2l2q_mean_m_sig param 0.0 1.0 \n")
             theFile.write("## CMS_zz2l2l_mean_m_err param {0} \n".format(meanCB_m_errPerCent))
             theFile.write("CMS_zz2l2q_sigma_m_sig param 0.0 1.0 \n")
-            theFile.write("## CMS_zz2l2l_sigma_m_err param {0} \n".format(sigmaCB_m_errPerCent)) 
-            
+            theFile.write("## CMS_zz2l2l_sigma_m_err param {0} \n".format(sigmaCB_m_errPerCent))
+
         if( self.decayChan == self.ID_2eResolved or self.decayChan == self.ID_2eMerged):
             theFile.write("CMS_zz2l2q_mean_e_sig param 0.0 1.0 \n")
             theFile.write("## CMS_zz2l2q_mean_e_err = {0} \n".format(meanCB_e_errPerCent))

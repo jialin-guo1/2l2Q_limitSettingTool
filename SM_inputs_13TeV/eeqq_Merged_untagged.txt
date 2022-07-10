@@ -12,7 +12,7 @@ systematic lumiUnc 1.062
 ## sqrtS ##
 sqrts 13
 
-## Channels to include in cards ##
+### Channels to include in cards ##
 channels ggH qqH vz ttbar zjets
 
 zjetsShape p0_zjets 6.88693
