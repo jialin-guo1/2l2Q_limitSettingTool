@@ -65,8 +65,8 @@ class datacardClass:
         self.channel = theInputs['decayChannel']
         self.is2D = theis2D
         self.outputDir = theOutputDir
-        self.sigMorph = True#theInputs['useCMS_zz2l2q_sigMELA']
-        self.bkgMorph = True#theInputs['useCMS_zz2l2q_bkgMELA']
+        self.sigMorph = True #theInputs['useCMS_zz2l2q_sigMELA']
+        self.bkgMorph = True #theInputs['useCMS_zz2l2q_bkgMELA']
         self.cat = theCat
         self.FracVBF = theFracVBF
 
@@ -116,8 +116,8 @@ class datacardClass:
 
         self.low_M = 500
         #if(self.channel=="eeqq_Merged" or self.channel=="mumuqq_Merged") : # if merge selected, start from 600GeV
-        if(self.jetType=="merged") :
-          self.low_M = 700
+        #if(self.jetType=="merged") :
+        #  self.low_M = 700
         self.high_M = 2500.0
         bins = int((self.high_M-self.low_M)/10)
         mzz_name = "zz2l2q_mass"

@@ -6,8 +6,8 @@ decay eeqq_Merged
 cat vbf-tagged
 
 ## lumi ##
-lumi 12.9
-systematic lumiUnc 1.062
+lumi 36.33
+systematic lumiUnc 1.012
 
 ## sqrtS ##
 sqrts 13
@@ -50,15 +50,15 @@ systematic elec_full 0.08
 systematic elec_trig 0.0075
 
 ##### Add Systematic to Cards ####
-##### allowed true/false ####
+##### allowed true/True ####
 systematic luminosity True
-systematic pdf_hzz2l2q_accept False
-systematic QCDscale_ggH False
-systematic QCDscale_vz False
-systematic BRhiggs_hzz2l2q False
-systematic CMS_eff False
-systematic CMS_zz2lJ_mean False
-systematic CMS_zz2lJ_sigma False
-systematic CMS_hzz2l2q_Zjets False
-systematic CMS_zz2l2q_bkgMELA False
-systematic CMS_zz2l2q_sigMELA False
+systematic pdf_hzz2l2q_accept True
+systematic QCDscale_ggH True
+systematic QCDscale_vz True
+systematic BRhiggs_hzz2l2q True
+systematic CMS_eff True
+systematic CMS_zz2lJ_mean True
+systematic CMS_zz2lJ_sigma True
+systematic CMS_hzz2l2q_Zjets True
+systematic CMS_zz2l2q_bkgMELA True
+systematic CMS_zz2l2q_sigMELA True

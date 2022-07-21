@@ -6,8 +6,8 @@ decay mumuqq_Resolved
 cat vbf-tagged
 
 ## lumi ##
-lumi 12.9
-systematic lumiUnc 1.062
+lumi 36.33
+systematic lumiUnc 1.012
 
 ## sqrtS ##
 sqrts 13
